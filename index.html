@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimal Cinema Gallery</title>
+    <style>
+        /* 黒を基調としたノイズレスなシアターデザイン */
+        body {
+            background-color: #0a0a0a;
+            color: #cccccc;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            color: #888888;
+            font-size: 18px;
+            font-weight: 300;
+            letter-spacing: 4px;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+        }
+
+        /* 3本の動画を美しく並べるグリッド配置 */
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .video-box {
+            background-color: #141414;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            aspect-ratio: 9 / 16; /* 縦長動画の比率を維持 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* YouTubeのロゴやエラーを排除した純粋な動画プレイヤー */
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* 枠内に綺麗に収める */
+            background-color: #000;
+        }
+
+        /* スマホ閲覧時は縦一列に自動調整 */
+        @media (max-width: 768px) {
+            .gallery-container {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Cinema Archive</h1>
+
+    <div class="gallery-container">
+        <!-- 1本目の動画 -->
+        <div class="video-box">
+            <video controls preload="metadata" playsinline>
+                <source src="1_コロンボ猫登場.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <!-- 2本目の動画 -->
+        <div class="video-box">
+            <video controls preload="metadata" playsinline>
+                <source src="2_報告を受ける.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <!-- 3本目の動画 -->
+        <div class="video-box">
+            <video controls preload="metadata" playsinline>
+                <source src="5_聞き込み開始.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+
+</body>
+</html>
