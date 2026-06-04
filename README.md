@@ -34,4 +34,4 @@ Currently running heavy text-to-video / image-to-video models under strict **VRA
 ---
 
 ## 🔗 Links
-* **YouTube:** [Your YouTube Channel URL] (Cinematic Shorts Archive)
+* **YouTube:** [http://www.youtube.com/@VRAM8GB_ComfyUI_Wan2.2] (Cinematic Shorts Archive)
