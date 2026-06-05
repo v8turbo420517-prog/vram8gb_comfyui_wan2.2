@@ -49,7 +49,8 @@ It dynamically switches between two different GGUF quantization models: a **High
 By dynamic swapping between the two GGUF models at the 40% mark, this workflow prevents the slow Shared System Memory fallback. A temporary 0.3 GB cache is allocated during the swap but is immediately garbage-collected, maintaining peak performance under strict 8GB VRAM limits.
 
 * **File (JSON):** `workflows/i2v_wan2.2_14b_lightweight.json`
-* **File (With Embedded Metadata):** `workflows/i2v_wan2.2_14b_lightweight.png` *(You can drag & drop this image directly into ComfyUI)*
+* **`end_of_the_day.png`** (Input Source Image)
+  👉 This is the source image for the Image-to-Video generation. After loading the JSON workflow, select/load this image into the `Load Image` node to generate the video.
 * **Sample Clips:** Located in the `examples/` directory (e.g., `1_columbo_cat.mp4`)
 * **Workflow Architecture:**
   ![Workflow Preview](workflows/i2v_wan2.2_14b_lightweight.png)
@@ -101,7 +102,8 @@ VRAM 8GB環境でのOOMを回避しつつ、妥協のない挙動を得るため
 ---
 
 * **配布ファイル (JSON):** `workflows/i2v_wan2.2_14b_lightweight.json`
-* **配布ファイル (メタデータ内包PNG):** `workflows/i2v_wan2.2_14b_lightweight.png` *(この画像をComfyUIの画面に直接ドラッグ＆ドロップするだけでワークフローを復元できます)*
+* **`end_of_the_day.png`** (生成元画像)
+  👉 Image-to-Video（動画生成）のベースとなる元画像です。JSONワークフローを読み込んだ後、`Load Image` ノードにこの画像を読み込ませて動画を生成します。
 * **生成サンプル動画:** `examples/` フォルダ内に格納しています（例: `1_columbo_cat.mp4`）
 * **必要カスタムノード:** `ComfyUI-WanVideoWrapper`, `ComfyUI-GGUF`, `ComfyUI-VideoHelperSuite`
 * **使用モデル配置:**
