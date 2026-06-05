@@ -28,6 +28,26 @@ You can find my custom production workflow in the `workflows/` directory.
 #### Wan2.2 Image-to-Video (14B GGUF Split-Sampling)
 A highly optimized I2V workflow designed to bypass OOM on 8GB VRAM while retaining high-fidelity motion. It features a dual-KSampler setup that switches between different diffusion models for early and late denoising steps.
 
+### 🔄 2-Stage K-Sampler & Dynamic Model Swapping
+
+To completely bypass OOM (Out of Memory) errors on 8GB VRAM while retaining the high-fidelity motion of the 14B model, this workflow splits the generation into two sequential K-Samplers. 
+
+It dynamically switches between two different GGUF quantization models: a **HighNoise** model for building the initial cinematic structure (early denoising steps), and a **LowNoise** model for refining fine details (late denoising steps).
+
+#### 📊 2-Stage K-Sampler Flow & VRAM Profile
+
+```text
+ ── [Total Denoise Steps: 100%] ───────────────────────────────────────┐
+ └── Step 0% ─── (HighNoise GGUF) ───► Step 40% ─── (LowNoise GGUF) ───► Step 100% ┘
+      [VRAM Optimizations: Model Swap triggers mid-way via Custom Node]
+```
+
+* Peak VRAM Usage: < 7.0 GB (Strictly stays within dedicated VRAM)
+* Shared System Memory: 0.0 GB (Avoids slow system memory fallback entirely)
+* Temporary Cache: Max ~0.3 GB during model swapping, released immediately.
+[!NOTE]
+By dynamic swapping between the two GGUF models at the 40% mark, this workflow prevents the slow Shared System Memory fallback. A temporary 0.3 GB cache is allocated during the swap but is immediately garbage-collected, maintaining peak performance under strict 8GB VRAM limits.
+
 * **File:** `workflows/i2v_wan2.2_14b_lightweight.json`
 * **Workflow Architecture:**
   ![Workflow Preview](workflows/workflow_preview.png)
@@ -68,6 +88,13 @@ VRAM 8GB環境でのOOMを回避しつつ、妥協のない挙動を得るため
  └── Step 0% ─── (HighNoise GGUF) ───► Step 40% ─── (LowNoise GGUF) ───► Step 100% ┘
       [VRAM Optimizations: Model Swap triggers mid-way via Custom Node]
 ```
+
+📊 VRAM & メモリプロファイル (RTX 3060 Ti 8GB 実測値)
+* ピーク時VRAM使用量: 7.0 GB 未満 (専用VRAM内に完全に収まります)
+* 共有システムメモリ: 0.0 GB (速度低下の原因となるメインメモリへの退避を完全回避)
+* 一時キャッシュ: モデル切り替え時に最大約 0.3 GB (処理後、即座に自動解放)
+[!NOTE]
+40%のステップを境に前後段でモデルを動的に切り替える（スワップする）際、一時的に約0.3GBのキャッシュが確保されますが、ガベージコレクションにより即座に解放されます。これにより、共有システムメモリ（Shared Memory）への低速なスワップを完全に回避し、8GB VRAMの限界性能を維持したまま14Bモデルの生成を完走させます。
 
 * **ファイル:** `workflows/i2v_wan2.2_14b_lightweight.json`
 * **必要カスタムノード:** `ComfyUI-WanVideoWrapper`, `ComfyUI-GGUF`, `ComfyUI-VideoHelperSuite`
