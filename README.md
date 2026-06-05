@@ -61,6 +61,13 @@ A highly optimized I2V workflow designed to bypass OOM on 8GB VRAM while retaini
 #### Wan2.2 Image-to-Video (14B GGUF 前後段切り替え軽量化版)
 VRAM 8GB環境でのOOMを回避しつつ、妥協のない挙動を得るために設計したI2Vワークフローです。2段構えのKサンプラー（高度）を使用し、動画の骨組みを作る前半（HighNoise）と、ディテールを整える後半（LowNoise）で異なるGGUFモデルを動的に切り替える玄人向けの設計になっています。
 
+#### 🔄 2段階 K-Sampler 処理フローイメージ
+
+```text
+ ── [Total Denoise Steps: 100%] ───────────────────────────────────────┐
+ └── Step 0% ─── (HighNoise GGUF) ───► Step 40% ─── (LowNoise GGUF) ───► Step 100% ┘
+      [VRAM Optimizations: Model Swap triggers mid-way via Custom Node]
+
 * **ファイル:** `workflows/i2v_wan2.2_14b_lightweight.json`
 * **必要カスタムノード:** `ComfyUI-WanVideoWrapper`, `ComfyUI-GGUF`, `ComfyUI-VideoHelperSuite`
 * **使用モデル配置:**
