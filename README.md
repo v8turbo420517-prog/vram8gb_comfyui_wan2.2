@@ -50,7 +50,7 @@ By dynamic swapping between the two GGUF models at the 40% mark, this workflow p
 
 * **File (JSON):** `workflows/i2v_wan2.2_14b_lightweight.json`
 * **`end_of_the_day.png`** (Input Source Image)
-👉 This is the source image for the Image-to-Video generation. After loading the JSON workflow, select/load this image into the `Load Image` node to generate the video.
+* 👉 This is the source image for the Image-to-Video generation. After loading the JSON workflow, select/load this image into the `Load Image` node to generate the video.
 * **Sample Clips:** Located in the `examples/` directory (e.g., `1_columbo_cat.mp4`)
 * **Workflow Architecture:**
   ![Workflow Preview](workflows/i2v_wan2.2_14b_lightweight.png)
@@ -103,7 +103,7 @@ VRAM 8GB環境でのOOMを回避しつつ、妥協のない挙動を得るため
 
 * **配布ファイル (JSON):** `workflows/i2v_wan2.2_14b_lightweight.json`
 * **`end_of_the_day.png`** (生成元画像)
-👉 Image-to-Video（動画生成）のベースとなる元画像です。JSONワークフローを読み込んだ後、`Load Image` ノードにこの画像を読み込ませて動画を生成します。
+* 👉 Image-to-Video（動画生成）のベースとなる元画像です。JSONワークフローを読み込んだ後、`Load Image` ノードにこの画像を読み込ませて動画を生成します。
 * **生成サンプル動画:** `examples/` フォルダ内に格納しています（例: `1_columbo_cat.mp4`）
 * **必要カスタムノード:** `ComfyUI-WanVideoWrapper`, `ComfyUI-GGUF`, `ComfyUI-VideoHelperSuite`
 * **使用モデル配置:**
