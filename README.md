@@ -74,7 +74,12 @@ By dynamic swapping between the two GGUF models at the 40% mark, this workflow p
 ## Future Plan & Roadmap
 The core workflow is fully completed and optimized. The 3-video gallery is updated weekly, fully synced with our latest YouTube uploads. For the full collection of videos, please check our YouTube channel.
 * [ ] Update the 3-video gallery with new character archetypes (Stationmaster, Railway Worker, etc.) every week.
-  
+
+---
+
+## 🔗 Links
+* **YouTube:** [http://www.youtube.com/@VRAM8GB_ComfyUI_Wan2.2] (Cinematic Shorts Archive)
+
 ---
 
 ## 🇯🇵 プロフィール（日本語）
@@ -128,5 +133,5 @@ VRAM 8GB環境でのOOMを回避しつつ、妥協のない挙動を得るため
   
 ---
 
-## 🔗 Links
+## 🔗 リンク
 * **YouTube:** [http://www.youtube.com/@VRAM8GB_ComfyUI_Wan2.2] (Cinematic Shorts Archive)
