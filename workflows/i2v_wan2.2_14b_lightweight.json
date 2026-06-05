@@ -714,7 +714,7 @@
       },
       "widgets_values": [
         "enable",
-        345057946852921,
+        1049965234661420,
         "randomize",
         6,
         1,
@@ -767,47 +767,6 @@
       "bgcolor": "#533"
     },
     {
-      "id": 6,
-      "type": "CLIPTextEncode",
-      "pos": [
-        415,
-        186
-      ],
-      "size": [
-        422.84503173828125,
-        164.31304931640625
-      ],
-      "flags": {},
-      "order": 8,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "clip",
-          "type": "CLIP",
-          "link": 74
-        }
-      ],
-      "outputs": [
-        {
-          "name": "CONDITIONING",
-          "type": "CONDITIONING",
-          "slot_index": 0,
-          "links": [
-            97
-          ]
-        }
-      ],
-      "title": "CLIP Text Encode (Positive Prompt)",
-      "properties": {
-        "Node name for S&R": "CLIPTextEncode"
-      },
-      "widgets_values": [
-        "Cat reaches up with both arms, pins towel to clothesline, fabric sways gently in breeze."
-      ],
-      "color": "#232",
-      "bgcolor": "#353"
-    },
-    {
       "id": 52,
       "type": "LoadImage",
       "pos": [
@@ -843,9 +802,50 @@
         "Node name for S&R": "LoadImage"
       },
       "widgets_values": [
-        "気晴らし.png",
+        "一日の〆.png",
         "image"
       ]
+    },
+    {
+      "id": 6,
+      "type": "CLIPTextEncode",
+      "pos": [
+        415,
+        186
+      ],
+      "size": [
+        422.84503173828125,
+        164.31304931640625
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 74
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            97
+          ]
+        }
+      ],
+      "title": "CLIP Text Encode (Positive Prompt)",
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "grandfather cat hand and mouth movement drinking Japanese sake, subtle natural motion"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
     }
   ],
   "links": [
@@ -1056,8 +1056,8 @@
     "ds": {
       "scale": 0.839054528882444,
       "offset": [
-        -82.08801063315333,
-        80.69412317954279
+        -83.0415229503929,
+        44.105364854388206
       ]
     },
     "frontendVersion": "1.42.10",
