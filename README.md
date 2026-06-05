@@ -67,6 +67,7 @@ VRAM 8GB環境でのOOMを回避しつつ、妥協のない挙動を得るため
  ── [Total Denoise Steps: 100%] ───────────────────────────────────────┐
  └── Step 0% ─── (HighNoise GGUF) ───► Step 40% ─── (LowNoise GGUF) ───► Step 100% ┘
       [VRAM Optimizations: Model Swap triggers mid-way via Custom Node]
+```
 
 * **ファイル:** `workflows/i2v_wan2.2_14b_lightweight.json`
 * **必要カスタムノード:** `ComfyUI-WanVideoWrapper`, `ComfyUI-GGUF`, `ComfyUI-VideoHelperSuite`
@@ -74,7 +75,6 @@ VRAM 8GB環境でのOOMを回避しつつ、妥協のない挙動を得るため
   * 前半用GGUF: `Wan2.2-I2V-14B-HighNoise-Q4_K_M.gguf`
   * 後半用GGUF: `Wan2.2-I2V-14B-LowNoise-Q4_K_M.gguf`
   * VAE: `Wan2.1_VAE.safetensors` (Wan2.1版VAEを推奨)
-```
 
 ---
 
