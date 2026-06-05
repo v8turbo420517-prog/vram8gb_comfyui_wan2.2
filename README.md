@@ -48,7 +48,9 @@ It dynamically switches between two different GGUF quantization models: a **High
 [!NOTE]
 By dynamic swapping between the two GGUF models at the 40% mark, this workflow prevents the slow Shared System Memory fallback. A temporary 0.3 GB cache is allocated during the swap but is immediately garbage-collected, maintaining peak performance under strict 8GB VRAM limits.
 
-* **File:** `workflows/i2v_wan2.2_14b_lightweight.json`
+* **File (JSON):** `workflows/i2v_wan2.2_14b_lightweight.json`
+* **File (With Embedded Metadata):** `workflows/i2v_wan2.2_14b_lightweight.png` *(You can drag & drop this image directly into ComfyUI)*
+* **Sample Clips:** Located in the `examples/` directory (e.g., `1_columbo_cat.mp4`)
 * **Workflow Architecture:**
   ![Workflow Preview](workflows/i2v_wan2.2_14b_lightweight.png)
 
@@ -96,7 +98,11 @@ VRAM 8GB環境でのOOMを回避しつつ、妥協のない挙動を得るため
 [!NOTE]
 40%のステップを境に前後段でモデルを動的に切り替える（スワップする）際、一時的に約0.3GBのキャッシュが確保されますが、ガベージコレクションにより即座に解放されます。これにより、共有システムメモリ（Shared Memory）への低速なスワップを完全に回避し、8GB VRAMの限界性能を維持したまま14Bモデルの生成を完走させます。
 
-* **ファイル:** `workflows/i2v_wan2.2_14b_lightweight.json`
+---
+
+* **配布ファイル (JSON):** `workflows/i2v_wan2.2_14b_lightweight.json`
+* **配布ファイル (メタデータ内包PNG):** `workflows/i2v_wan2.2_14b_lightweight.png` *(この画像をComfyUIの画面に直接ドラッグ＆ドロップするだけでワークフローを復元できます)*
+* **生成サンプル動画:** `examples/` フォルダ内に格納しています（例: `1_columbo_cat.mp4`）
 * **必要カスタムノード:** `ComfyUI-WanVideoWrapper`, `ComfyUI-GGUF`, `ComfyUI-VideoHelperSuite`
 * **使用モデル配置:**
   * 前半用GGUF: `Wan2.2-I2V-14B-HighNoise-Q4_K_M.gguf`
