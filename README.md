@@ -69,8 +69,6 @@ By dynamic swapping between the two GGUF models at the 40% mark, this workflow p
 * **CLIP Vision:** `ComfyUI/models/clip_vision/clip-vision_vit-h.safetensors`
 * **LoRA** `ComfyUI/models/loras/lightx2v_I2V_14B_480p_cfg_step_distill_rank32_bf16.safetensors`
 
----
-
 ## Future Updates & Roadmap
 * **Alternative character archetypes and workflows updated weekly.**
   👉 New thematic character roles and optimized generation pipelines are planning to be released every week. Stay tuned!
@@ -119,10 +117,6 @@ VRAM 8GB環境でのOOMを回避しつつ、妥協のない挙動を得るため
 * **VAE:** `ComfyUI/models/vae/Wan2.1_VAE.safetensors` (Recommended for this setup)
 * **CLIP Vision:** `ComfyUI/models/clip_vision/clip-vision_vit-h.safetensors`
 * **LoRA** `ComfyUI/models/loras/lightx2v_I2V_14B_480p_cfg_step_distill_rank32_bf16.safetensors`
-
----
-
----
 
 ## 今後の更新予定 / ロードマップ
 * **週次で新しいキャラクターアーキタイプやワークフローを更新予定です。**
