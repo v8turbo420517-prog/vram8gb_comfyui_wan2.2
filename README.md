@@ -50,7 +50,7 @@ By dynamic swapping between the two GGUF models at the 40% mark, this workflow p
 
 * **File:** `workflows/i2v_wan2.2_14b_lightweight.json`
 * **Workflow Architecture:**
-  ![Workflow Preview](workflows/workflow_preview.png)
+  ![Workflow Preview](workflows/i2v_wan2.2_14b_lightweight.png)
 
 ##### 🧩 Required Custom Nodes
 * `ComfyUI-WanVideoWrapper`
