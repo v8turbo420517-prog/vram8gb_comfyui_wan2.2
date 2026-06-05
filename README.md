@@ -71,9 +71,9 @@ By dynamic swapping between the two GGUF models at the 40% mark, this workflow p
 
 ---
 
-## Future Updates & Roadmap
-* **Alternative character archetypes and workflows updated weekly.**<br>
-  👉 New thematic character roles and optimized generation pipelines are planning to be released every week. Stay tuned!
+## Future Plan & Roadmap
+The core workflow is fully completed and optimized. The 3-video gallery is updated weekly, fully synced with our latest YouTube uploads. For the full collection of videos, please check our YouTube channel.
+* [ ] Update the 3-video gallery with new character archetypes (Stationmaster, Railway Worker, etc.) every week.
   
 ---
 
@@ -122,9 +122,9 @@ VRAM 8GB環境でのOOMを回避しつつ、妥協のない挙動を得るため
 
 ---
 
-## 今後の更新予定 / ロードマップ
-* **週次で新しいキャラクターアーキタイプやワークフローを更新予定です。**<br>
-  👉 異なる役職・テーマのキャラクター設定や、さらに最適化した生成パイプラインを毎週追加していく予定です。ぜひチェック（Watch / Star）してお待ちください！
+## 今後の展開 / ロードマップ
+コアとなるワークフローはこれで完全に完成・最適化されています。3つの動画ギャラリーはYouTubeの最新投稿と連動し、週1回の頻度で更新されます。過去のアーカイブやその他の動画は、YouTubeチャンネル側でご覧いただけます。
+* [ ] 3つの動画ギャラリーを、新しいキャラクターアーキタイプ（駅長・鉄道員など）に毎週入れ替えて公開していきます。
   
 ---
 
