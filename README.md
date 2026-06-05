@@ -109,7 +109,10 @@ VRAM 8GB環境でのOOMを回避しつつ、妥協のない挙動を得るため
 * **使用モデル配置:**
   * 前半用GGUF: `Wan2.2-I2V-14B-HighNoise-Q4_K_M.gguf`
   * 後半用GGUF: `Wan2.2-I2V-14B-LowNoise-Q4_K_M.gguf`
-  * VAE: `Wan2.1_VAE.safetensors` (Wan2.1版VAEを推奨)
+* **Text Encoder:** `ComfyUI/models/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors` (タイプ: `wan`)
+* **VAE:** `ComfyUI/models/vae/Wan2.1_VAE.safetensors` (Recommended for this setup)
+* **CLIP Vision:** `ComfyUI/models/clip_vision/clip-vision_vit-h.safetensors`
+* **LoRA** `ComfyUI/models/loras/lightx2v_I2V_14B_480p_cfg_step_distill_rank32_bf16.safetensors`
 
 ---
 
