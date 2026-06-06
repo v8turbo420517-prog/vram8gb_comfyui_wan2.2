@@ -1,6 +1,6 @@
 # Hi there, I'm a Local AI Creator / Architect 👋
 
-<video src="Summer_Adventure.mp4" autoplay loop muted playsinline width="100%"></video>
+https://github.com/user-attachments/assets/aea62732-d67c-468e-94af-d9f168e84824
 
 ---
 
@@ -15,11 +15,6 @@ This profile serves as a technical portfolio for optimizing heavy AI models on a
 * **Display:** Dual monitor setup (including EIZO ColorEdge CG248-4K for professional color management)
 
 ## 🚀 Local AI Workflows & Benchmarks
-
-https://github.com/user-attachments/assets/aea62732-d67c-468e-94af-d9f168e84824
-
-
-
 ### 🎥 Wan2.2 / Wan2.1 (ComfyUI)
 Currently running heavy text-to-video / image-to-video models under strict **VRAM 8GB limitations**.
 
