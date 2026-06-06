@@ -71,6 +71,38 @@ By dynamic swapping between the two GGUF models at the 40% mark, this workflow p
 
 ---
 
+🛠️ External Tools & Post-Production Settings
+1. ComfyUI (Wan2.2) — Generation
+* Role: Generates the core motion, composition, and cinematic atmosphere based on the prompt.
+
+* Philosophy: Prioritizes generation speed and VRAM efficiency. It focuses purely on outputting high-potential "raw material" without forced upscaling or frame interpolation at this stage.
+
+2. Topaz Video AI — Enhancement & Upscaling
+* AI Model: Proteus (Auto)
+
+* Resolution: 200% (2x) Upscale
+
+* Why this setting: Proteus (Auto) automatically cleans up AI-generated artifacts, flickers, and blurs for each unique clip. A steady 2x upscale enhances cinematic details (like animal fur) naturally without pushing the AI to a breaking point.
+
+3. Premiere Pro — Final Color Grading & Export
+* Sequence: Full HD (1920x1080) — Apply "Set to Frame Size" (or Match Sequence Settings) to fit the upscaled Topaz source into the Full HD timeline, compressing the pixel density for a crisper look.
+
+* Lumetri Color Profile: Fixes the typical "washed-out" look of AI raw videos by enhancing presence and clarity with these precise values:
+
+  * Exposure: +0.2
+
+  * Contrast: +5
+
+  * Vibrance: +10
+
+  * Saturation: 105
+
+  * Sharpening: +7
+
+* Export Setting: H.264 / Match Source - Adaptive High Bitrate (Ensures reliable high quality and optimal file size for video platforms).
+
+---
+
 ## Future Plan & Roadmap
 The core workflow is fully completed and optimized. The 3-video gallery is updated weekly to showcase our latest creations. For the full collection of videos, please check our YouTube channel.<br>
 ▢ Update the 3-video gallery with new character archetypes (Stationmaster, Railway Worker, etc.) every week.
@@ -107,6 +139,7 @@ VRAM 8GB環境でのOOMを回避しつつ、妥協のない挙動を得るため
 * 一時キャッシュ: モデル切り替え時に最大約 0.3 GB (処理後、即座に自動解放)
 [!NOTE]
 40%のステップを境に前後段でモデルを動的に切り替える（スワップする）際、一時的に約0.3GBのキャッシュが確保されますが、ガベージコレクションにより即座に解放されます。これにより、共有システムメモリ（Shared Memory）への低速なスワップを完全に回避し、8GB VRAMの限界性能を維持したまま14Bモデルの生成を完走させます。
+
 
 * **配布ファイル (JSON):** `workflows/i2v_wan2.2_14b_lightweight.json`
 * **`end_of_the_day.png`** (生成元画像)<br>
