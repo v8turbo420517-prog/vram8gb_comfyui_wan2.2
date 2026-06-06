@@ -1,6 +1,6 @@
 # Hi there, I'm a Local AI Creator / Architect 👋
 
-<video src="examples/Summer Adventure.mp4" autoplay loop muted playsinline width="100%"></video>
+<video src="examples/Summer_Adventure.mp4" autoplay loop muted playsinline width="100%"></video>
 
 ---
 
