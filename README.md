@@ -1,5 +1,7 @@
 # Hi there, I'm a Local AI Creator / Architect 👋
 
+<video src="examples/Summer Adventure.mp4" autoplay loop muted playsinline width="100%"></video>
+
 I focus on creating 5-second silent cinematic videos using local AI, emphasizing the beauty of subtraction and subtle atmosphere ("ma"). 
 This profile serves as a technical portfolio for optimizing heavy AI models on a mid-range hardware setup.
 
