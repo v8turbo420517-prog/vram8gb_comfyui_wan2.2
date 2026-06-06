@@ -1,11 +1,11 @@
 # Hi there, I'm a Local AI Creator / Architect 👋
 
+I focus on creating 5-second silent cinematic videos using local AI, emphasizing the beauty of subtraction and subtle atmosphere ("ma"). 
+This profile serves as a technical portfolio for optimizing heavy AI models on a mid-range hardware setup.
+
 https://github.com/user-attachments/assets/aea62732-d67c-468e-94af-d9f168e84824
 
 ---
-
-I focus on creating 5-second silent cinematic videos using local AI, emphasizing the beauty of subtraction and subtle atmosphere ("ma"). 
-This profile serves as a technical portfolio for optimizing heavy AI models on a mid-range hardware setup.
 
 ## 🛠️ Machine Specifications & Environment
 * **OS:** Windows 11 (Optimized for resource management)
