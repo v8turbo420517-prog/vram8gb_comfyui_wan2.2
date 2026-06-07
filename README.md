@@ -3,7 +3,7 @@
 I focus on creating 5-second silent cinematic videos using local AI, emphasizing the beauty of subtraction and subtle atmosphere ("ma"). 
 This profile serves as a technical portfolio for optimizing heavy AI models on a mid-range hardware setup.
 
-https://github.com/user-attachments/assets/aea62732-d67c-468e-94af-d9f168e84824
+https://github.com/user-attachments/assets/20111eb2-aa5a-4886-83c6-aa9378e0e757
 
 ---
 
