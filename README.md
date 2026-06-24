@@ -41,7 +41,7 @@ It dynamically switches between two different GGUF quantization models: a **High
 
 ```text
  ── [Total Denoise Steps: 100%] ───────────────────────────────────────┐
- └── Step 0% ─── (HighNoise GGUF) ───► Step 40% ─── (LowNoise GGUF) ───► Step 100% ┘
+ └── Step 0% ─── (HighNoise GGUF) ───► Step 50% ─── (LowNoise GGUF) ───► Step 100% ┘
       [VRAM Optimizations: Model Swap triggers mid-way via Custom Node]
 ```
 
@@ -49,7 +49,7 @@ It dynamically switches between two different GGUF quantization models: a **High
 * Shared System Memory: 0.0 GB (Avoids slow system memory fallback entirely)
 * Temporary Cache: Max ~0.3 GB during model swapping, released immediately.
 [!NOTE]
-By dynamic swapping between the two GGUF models at the 40% mark, this workflow prevents the slow Shared System Memory fallback. A temporary 0.3 GB cache is allocated during the swap but is immediately garbage-collected, maintaining peak performance under strict 8GB VRAM limits.
+When loading the two GGUF models (HighNoise / LowNoise), a temporary 0.3 GB cache is allocated and immediately garbage-collected before the first K-Sampler stage begins its main processing. This avoids the slow Shared System Memory fallback entirely, maintaining peak performance under strict 8GB VRAM limits while completing generation with the 14B model.
 
 * **File (JSON):** `workflows/i2v_wan2.2_14b_lightweight.json`
 * **`end_of_the_day.png`** (Input Source Image)<br>
@@ -70,7 +70,9 @@ By dynamic swapping between the two GGUF models at the 40% mark, this workflow p
 * **Text Encoder:** `ComfyUI/models/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors` (Type: `wan`)
 * **VAE:** `ComfyUI/models/vae/Wan2.1_VAE.safetensors` (Recommended for this setup)
 * **CLIP Vision:** `ComfyUI/models/clip_vision/clip-vision_vit-h.safetensors`
-* **LoRA** `ComfyUI/models/loras/lightx2v_I2V_14B_480p_cfg_step_distill_rank32_bf16.safetensors`
+* **LoRA** `ComfyUI/models/loras/`
+  * `Wan2.2-Lightning_I2V-A14B-4steps-lora_HIGH_fp16.safetensors`
+  * `Wan2.2-Lightning_I2V-A14B-4steps-lora_LOW_fp16.safetensors`
 
 ---
 
@@ -81,7 +83,7 @@ By dynamic swapping between the two GGUF models at the 40% mark, this workflow p
 * Philosophy: Prioritizes generation speed and VRAM efficiency. It focuses purely on outputting high-potential "raw material" without forced upscaling or frame interpolation at this stage.
 
 2. Topaz Video AI — Enhancement & Upscaling
-* AI Model: Proteus (Auto)
+* AI Model: Artemis (Medium Quality)
 
 * Resolution: 200% (2x) Upscale
 
@@ -133,7 +135,7 @@ VRAM 8GB環境でのOOMを回避しつつ、妥協のない挙動を得るため
 
 ```text
  ── [Total Denoise Steps: 100%] ───────────────────────────────────────┐
- └── Step 0% ─── (HighNoise GGUF) ───► Step 40% ─── (LowNoise GGUF) ───► Step 100% ┘
+ └── Step 0% ─── (HighNoise GGUF) ───► Step 50% ─── (LowNoise GGUF) ───► Step 100% ┘
       [VRAM Optimizations: Model Swap triggers mid-way via Custom Node]
 ```
 
@@ -142,7 +144,7 @@ VRAM 8GB環境でのOOMを回避しつつ、妥協のない挙動を得るため
 * 共有システムメモリ: 0.0 GB (速度低下の原因となるメインメモリへの退避を完全回避)
 * 一時キャッシュ: モデル切り替え時に最大約 0.3 GB (処理後、即座に自動解放)
 [!NOTE]
-40%のステップを境に前後段でモデルを動的に切り替える（スワップする）際、一時的に約0.3GBのキャッシュが確保されますが、ガベージコレクションにより即座に解放されます。これにより、共有システムメモリ（Shared Memory）への低速なスワップを完全に回避し、8GB VRAMの限界性能を維持したまま14Bモデルの生成を完走させます。
+2つのGGUFモデル（HighNoise / LowNoise）を読み込む際、一時的に約0.3GBのキャッシュが確保されますが、前段のKサンプラーによる本処理が始まる前にガベージコレクションにより即座に解放されます。これにより、共有システムメモリ（Shared Memory）への低速なフォールバックを完全に回避し、8GB VRAMの限界性能を維持したまま14Bモデルの生成を完走させます。
 
 ---
 
@@ -157,7 +159,9 @@ VRAM 8GB環境でのOOMを回避しつつ、妥協のない挙動を得るため
 * **Text Encoder:** `ComfyUI/models/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors` (タイプ: `wan`)
 * **VAE:** `ComfyUI/models/vae/Wan2.1_VAE.safetensors` (Recommended for this setup)
 * **CLIP Vision:** `ComfyUI/models/clip_vision/clip-vision_vit-h.safetensors`
-* **LoRA** `ComfyUI/models/loras/lightx2v_I2V_14B_480p_cfg_step_distill_rank32_bf16.safetensors`
+* **LoRA** `ComfyUI/models/loras/`
+  * `Wan2.2-Lightning_I2V-A14B-4steps-lora_HIGH_fp16.safetensors`
+  * `Wan2.2-Lightning_I2V-A14B-4steps-lora_LOW_fp16.safetensors`
 
 ---
 
@@ -168,7 +172,7 @@ VRAM 8GB環境でのOOMを回避しつつ、妥協のない挙動を得るため
 * 設計思想: 生成速度とVRAM効率を最優先し、この段階では無理な高解像度化や補間は行いません。ポテンシャルの高い「ピュアな生素材」を出力することに特化させています。
 
 2. Topaz Video AI — Enhancement & Upscaling（高画質化）
-* AIモデル: Proteus (Auto)
+* AIモデル: Artemis (Medium Quality)
 
 * 解像度: 200% (2倍) アップスケール
 
