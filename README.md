@@ -47,8 +47,7 @@ It dynamically switches between two different GGUF quantization models: a **High
 
 * Peak VRAM Usage: < 7.0 GB (Strictly stays within dedicated VRAM)
 * Shared System Memory: 0.0 GB (Avoids slow system memory fallback entirely)
-* Temporary Cache: Max ~0.3 GB during model swapping, released immediately.
-[!NOTE]
+* Temporary Cache:<br>
 When loading the two GGUF models (HighNoise / LowNoise), a temporary 0.3 GB cache is allocated and immediately garbage-collected before the first K-Sampler stage begins its main processing. This avoids the slow Shared System Memory fallback entirely, maintaining peak performance under strict 8GB VRAM limits while completing generation with the 14B model.
 
 * **File (JSON):** `workflows/i2v_wan2.2_14b_lightweight.json`
@@ -64,7 +63,7 @@ When loading the two GGUF models (HighNoise / LowNoise), a temporary 0.3 GB cach
 * `ComfyUI-VideoHelperSuite`
 
 ##### 💾 Required Models & Paths
-* **Diffusion Models (GGUF):** `ComfyUI/models/diffusion_models/`
+* **Unet Models (GGUF):** `ComfyUI/models/unet/`
   * `Wan2.2-I2V-14B-HighNoise-Q4_K_M.gguf` (For initial steps)
   * `Wan2.2-I2V-14B-LowNoise-Q4_K_M.gguf` (For refinement steps)
 * **Text Encoder:** `ComfyUI/models/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors` (Type: `wan`)
@@ -142,8 +141,7 @@ VRAM 8GB環境でのOOMを回避しつつ、妥協のない挙動を得るため
 📊 VRAM & メモリプロファイル (RTX 3060 Ti 8GB 実測値)
 * ピーク時VRAM使用量: 7.0 GB 未満 (専用VRAM内に完全に収まります)
 * 共有システムメモリ: 0.0 GB (速度低下の原因となるメインメモリへの退避を完全回避)
-* 一時キャッシュ: モデル切り替え時に最大約 0.3 GB (処理後、即座に自動解放)
-[!NOTE]
+* 一時キャッシュ:<br>
 2つのGGUFモデル（HighNoise / LowNoise）を読み込む際、一時的に約0.3GBのキャッシュが確保されますが、前段のKサンプラーによる本処理が始まる前にガベージコレクションにより即座に解放されます。これにより、共有システムメモリ（Shared Memory）への低速なフォールバックを完全に回避し、8GB VRAMの限界性能を維持したまま14Bモデルの生成を完走させます。
 
 ---
@@ -153,11 +151,11 @@ VRAM 8GB環境でのOOMを回避しつつ、妥協のない挙動を得るため
   👉 Image-to-Video（動画生成）のベースとなる元画像です。JSONワークフローを読み込んだ後、`Load Image` ノードにこの画像を読み込ませて動画を生成します。
 * **生成サンプル動画:** `examples/` フォルダ内に格納しています（例: `1_columbo_cat.mp4`）
 * **必要カスタムノード:** `ComfyUI-WanVideoWrapper`, `ComfyUI-GGUF`, `ComfyUI-VideoHelperSuite`
-* **使用モデル配置:**
-  * 前半用GGUF: `Wan2.2-I2V-14B-HighNoise-Q4_K_M.gguf`
-  * 後半用GGUF: `Wan2.2-I2V-14B-LowNoise-Q4_K_M.gguf`
+* **Unetモデル (GGUF):** `ComfyUI/models/unet/`
+  * `Wan2.2-I2V-14B-HighNoise-Q4_K_M.gguf` (前半用)
+  * `Wan2.2-I2V-14B-LowNoise-Q4_K_M.gguf` (後半用)
 * **Text Encoder:** `ComfyUI/models/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors` (タイプ: `wan`)
-* **VAE:** `ComfyUI/models/vae/Wan2.1_VAE.safetensors` (Recommended for this setup)
+* **VAE:** `ComfyUI/models/vae/Wan2.1_VAE.safetensors` (必ずこれを使用すること)
 * **CLIP Vision:** `ComfyUI/models/clip_vision/clip-vision_vit-h.safetensors`
 * **LoRA** `ComfyUI/models/loras/`
   * `Wan2.2-Lightning_I2V-A14B-4steps-lora_HIGH_fp16.safetensors`
