@@ -81,10 +81,10 @@ When loading the two GGUF models (HighNoise / LowNoise), a temporary 0.3 GB cach
 
 * Resolution: 200% (2x) Upscale
 
-* Why this setting: Proteus (Auto) automatically cleans up AI-generated artifacts, flickers, and blurs for each unique clip. A steady 2x upscale enhances cinematic details (like animal fur) naturally without pushing the AI to a breaking point.
+* Why this setting: Artemis (MQ) automatically cleans up AI-generated artifacts, flickers, and blurs for each unique clip. A steady 2x upscale enhances cinematic details (like animal fur) naturally without pushing the AI to a breaking point.
 
 3. Premiere Pro — Final Color Grading & Export
-* Sequence: Full HD (1920x1080 or 1080x1920) — Apply "Set to Frame Size" (or Match Sequence Settings) to fit the upscaled Topaz source into the Full HD timeline, compressing the pixel density for a crisper look.
+* Sequence: Full HD (1920x1080 or 1080x1920) — Apply "Set to Frame Size" (or Match Sequence Settings) to fit the upscaled Topaz source into the Full HD timeline.
 
 * Lumetri Color Profile: Fixes the typical "washed-out" look of AI raw videos by enhancing presence and clarity with these precise values:
 
@@ -161,12 +161,12 @@ VRAM 8GB環境でのOOMを回避しつつ、妥協のない挙動を得るため
 
 * 解像度: 200% (2倍) アップスケール
 
-* 選定理由: AI生成動画はカットごとにノイズやボケ具合が異なります。Proteusのオート機能を使うことで、動画全体のフリッカー（ちらつき）や破綻を自動で抑えつつ、被写体（動物の毛並みなど）の微細なディテールを自然に引き出すことができます。
+* 選定理由: AI生成動画はカットごとにノイズやボケ具合が異なります。Artemisを使うことで、動画全体のフリッカー（ちらつき）や破綻を自動で抑えつつ、被写体（動物の毛並みなど）の微細なディテールを自然に引き出すことができます。
 
 3. Premiere Pro — Final Color Grading & Export（編集・書き出し）
 *シーケンス設定: フルHD (1920x1080または1080x1920)
 
-* タイムライン配置後、「フレームサイズに合わせる」を適用。Topazで2倍にした高密度な映像をフルHDに凝縮させることで、よりくっきりとしたディテール感を生み出します。
+* タイムライン配置後、「フレームサイズに合わせる」を適用。
 
 * Lumetriカラー設定: AI動画特有の「眠い（コントラストや発色が弱い）印象」を解消し、映像の存在感を決定づける基本プロファイルです。
 
