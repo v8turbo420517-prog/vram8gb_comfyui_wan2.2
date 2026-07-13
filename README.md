@@ -107,8 +107,8 @@ The core workflow is fully completed and optimized. The 3-video gallery is updat
 ▢ Update the 3-video gallery with new character archetypes (Stationmaster, Railway Worker, etc.) every week.
 
 ## 🔗 Links
-* **Gallery:** [https://v8turbo420517-prog.github.io/vram8gb_comfyui_wan2.2/] (3-Video)
-* **YouTube:** [http://www.youtube.com/@VRAM8GB_ComfyUI_Wan2.2] (Cinematic Shorts Archive)
+* **5-second video:** [https://5s-video.com] (Gallery)
+* **Instagram:** [http://www.instagram.com/mii_jukuchou/] (Reel Videos)
 
 ---
 
@@ -189,5 +189,5 @@ VRAM 8GB環境でのOOMを回避しつつ、妥協のない挙動を得るため
 ▢ 3つの動画ギャラリーを、新しいキャラクターアーキタイプ（駅長・鉄道員など）に毎週入れ替えて公開していきます。
   
 ## 🔗 リンク
-* **ギャラリー:** [https://v8turbo420517-prog.github.io/vram8gb_comfyui_wan2.2/] (3本の動画)
-* **YouTube:** [http://www.youtube.com/@VRAM8GB_ComfyUI_Wan2.2] (Cinematic Shorts Archive)
+* **5秒動画:** [https://5s-video.com] (ギャラリー)
+* **インスタグラム:** [http://www.www.instagram.com/mii_jukuchou/] (リール動画)
