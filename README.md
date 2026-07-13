@@ -190,4 +190,4 @@ VRAM 8GB環境でのOOMを回避しつつ、妥協のない挙動を得るため
   
 ## 🔗 リンク
 * **5秒動画:** [https://5s-video.com] (ギャラリー)
-* **インスタグラム:** [http://www.www.instagram.com/mii_jukuchou/] (リール動画)
+* **インスタグラム:** [http://www.instagram.com/mii_jukuchou/] (リール動画)
