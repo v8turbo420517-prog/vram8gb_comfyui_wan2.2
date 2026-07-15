@@ -103,7 +103,7 @@ When loading the two GGUF models (HighNoise / LowNoise), a temporary 0.3 GB cach
 ---
 
 ## Future Plan & Roadmap
-The core workflow is now fully complete and optimized. You can view past archives and other videos in 5-second videos.
+The core workflow is now fully complete and optimized. You can view past archives and other videos in 5-second video.
 
 ## 🔗 Links
 * **5-second video:** [https://5s-video.com] (Gallery)
