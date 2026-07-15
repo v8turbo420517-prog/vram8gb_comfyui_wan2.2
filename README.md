@@ -103,8 +103,7 @@ When loading the two GGUF models (HighNoise / LowNoise), a temporary 0.3 GB cach
 ---
 
 ## Future Plan & Roadmap
-The core workflow is fully completed and optimized. The 3-video gallery is updated weekly to showcase our latest creations. For the full collection of videos, please check our YouTube channel.<br>
-▢ Update the 3-video gallery with new character archetypes (Stationmaster, Railway Worker, etc.) every week.
+The core workflow is now fully complete and optimized. You can view past archives and other videos in 5-second videos.
 
 ## 🔗 Links
 * **5-second video:** [https://5s-video.com] (Gallery)
