@@ -77,14 +77,14 @@ When loading the two GGUF models (HighNoise / LowNoise), a temporary 0.3 GB cach
 * Philosophy: Prioritizes generation speed and VRAM efficiency. It focuses purely on outputting high-potential "raw material" without forced upscaling or frame interpolation at this stage.
 
 2. Topaz Video AI — Enhancement & Upscaling
-* AI Model: Artemis (Medium Quality)
+* AI Model: Rhea (Auto)
 
-* Resolution: 200% (2x) Upscale
+* Resolution: 400% (4x) Upscale
 
-* Why this setting: Artemis (MQ) automatically cleans up AI-generated artifacts, flickers, and blurs for each unique clip. A steady 2x upscale enhances cinematic details (like animal fur) naturally without pushing the AI to a breaking point.
+* Why this setting: Because it reconstructs fine details lost during upscaling while preserving a natural texture.
 
 3. Premiere Pro — Final Color Grading & Export
-* Sequence: Full HD (1920x1080 or 1080x1920) — Apply "Set to Frame Size" (or Match Sequence Settings) to fit the upscaled Topaz source into the Full HD timeline.
+* Sequence: Full HD+ (1920x1920) — Apply "Set to Frame Size" (or Match Sequence Settings) to fit the upscaled Topaz source into the Full HD+ timeline.
 
 * Lumetri Color Profile: Fixes the typical "washed-out" look of AI raw videos by enhancing presence and clarity with these precise values:
 
@@ -156,14 +156,14 @@ VRAM 8GB環境でのOOMを回避しつつ、妥協のない挙動を得るため
 * 設計思想: 生成速度とVRAM効率を最優先し、この段階では無理な高解像度化や補間は行いません。ポテンシャルの高い「ピュアな生素材」を出力することに特化させています。
 
 2. Topaz Video AI — Enhancement & Upscaling（高画質化）
-* AIモデル: Artemis (Medium Quality)
+* AIモデル: Rhea (Auto)
 
-* 解像度: 200% (2倍) アップスケール
+* 解像度: 400% (4倍) アップスケール
 
-* 選定理由: AI生成動画はカットごとにノイズやボケ具合が異なります。Artemisを使うことで、動画全体のフリッカー（ちらつき）や破綻を自動で抑えつつ、被写体（動物の毛並みなど）の微細なディテールを自然に引き出すことができます。
+* 選定理由: アップスケールで失ったディテールを自然な質感を維持しながら細部を再構築するから
 
 3. Premiere Pro — Final Color Grading & Export（編集・書き出し）
-*シーケンス設定: フルHD (1920x1080または1080x1920)
+*シーケンス設定: フルHD+ (1920x1920)
 
 * タイムライン配置後、「フレームサイズに合わせる」を適用。
 
