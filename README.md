@@ -11,7 +11,7 @@ https://github.com/user-attachments/assets/20111eb2-aa5a-4886-83c6-aa9378e0e757
 * **OS:** Windows 11 (Optimized for resource management)
 * **CPU:** Intel Core i5-12400F
 * **GPU:** NVIDIA GeForce RTX 3060 Ti (VRAM 8GB)
-* **RAM:** 32GB
+* **RAM:** 64GB
 * **Display:** Dual monitor setup (including EIZO ColorEdge CG248-4K for professional color management)
 
 ## 🚀 Local AI Workflows & Benchmarks
