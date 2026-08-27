@@ -18,7 +18,7 @@ https://github.com/user-attachments/assets/20111eb2-aa5a-4886-83c6-aa9378e0e757
 ### 🎥 Wan2.2 / Wan2.1 (ComfyUI)
 Currently running heavy text-to-video / image-to-video models under strict **VRAM 8GB limitations**.
 
-* **Quantization:** Utilizing Q4 GGUF / NF4 models to bypass OOM (Out of Memory) and maintain stability.
+* **Quantization:** Utilizing Q5 GGUF / NF4 models to bypass OOM (Out of Memory) and maintain stability.
 * **VRAM Optimization:** Custom node management and strict VRAM caching rules in ComfyUI (Forge-based optimization logic).
 * **Cinematic Video Pipeline:** 
   1. Low-VRAM Generation via ComfyUI (GGUF).
@@ -59,8 +59,8 @@ When loading the two GGUF models (HighNoise / LowNoise), a temporary 0.3 GB cach
 
 ##### 💾 Required Models & Paths
 * **Unet Models (GGUF):** `ComfyUI/models/unet/`
-  * `Wan2.2-I2V-14B-HighNoise-Q4_K_M.gguf` (For initial steps)
-  * `Wan2.2-I2V-14B-LowNoise-Q4_K_M.gguf` (For refinement steps)
+  * `Wan2.2-I2V-14B-HighNoise-Q5_K_M.gguf` (For initial steps)
+  * `Wan2.2-I2V-14B-LowNoise-Q5_K_M.gguf` (For refinement steps)
 * **Text Encoder:** `ComfyUI/models/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors` (Type: `wan`)
 * **VAE:** `ComfyUI/models/vae/Wan2.1_VAE.safetensors` (Recommended for this setup)
 * **CLIP Vision:** `ComfyUI/models/clip_vision/clip-vision_vit-h.safetensors`
@@ -138,8 +138,8 @@ VRAM 8GB環境でのOOMを回避しつつ、妥協のない挙動を得るため
 * **生成サンプル動画:** `examples/` フォルダ内に格納しています（例: `1_columbo_cat.mp4`）
 * **必要カスタムノード:** `ComfyUI-WanVideoWrapper`, `ComfyUI-GGUF`, `ComfyUI-VideoHelperSuite`
 * **Unetモデル (GGUF):** `ComfyUI/models/unet/`
-  * `Wan2.2-I2V-14B-HighNoise-Q4_K_M.gguf` (前半用)
-  * `Wan2.2-I2V-14B-LowNoise-Q4_K_M.gguf` (後半用)
+  * `Wan2.2-I2V-14B-HighNoise-Q5_K_M.gguf` (前半用)
+  * `Wan2.2-I2V-14B-LowNoise-Q5_K_M.gguf` (後半用)
 * **Text Encoder:** `ComfyUI/models/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors` (タイプ: `wan`)
 * **VAE:** `ComfyUI/models/vae/Wan2.1_VAE.safetensors` (必ずこれを使用すること)
 * **CLIP Vision:** `ComfyUI/models/clip_vision/clip-vision_vit-h.safetensors`
