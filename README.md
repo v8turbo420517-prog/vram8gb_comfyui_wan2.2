@@ -62,7 +62,7 @@ When loading the two GGUF models (HighNoise / LowNoise), a temporary 0.3 GB cach
   * `Wan2.2-I2V-14B-HighNoise-Q5_K_M.gguf` (For initial steps)
   * `Wan2.2-I2V-14B-LowNoise-Q5_K_M.gguf` (For refinement steps)
 * **Text Encoder:** `ComfyUI/models/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors` (Type: `wan`)
-* **VAE:** `ComfyUI/models/vae/Wan2.1_VAE.safetensors` (Recommended for this setup)
+* **VAE:** `ComfyUI/models/vae/Wan2.1_VAE.safetensors` (Required for this workflow)
 * **CLIP Vision:** `ComfyUI/models/clip_vision/clip-vision_vit-h.safetensors`
 * **LoRA** `ComfyUI/models/loras/`
   * `Wan2.2-Lightning_I2V-A14B-4steps-lora_HIGH_fp16.safetensors`
