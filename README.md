@@ -135,7 +135,7 @@ VRAM 8GB環境でのOOMを回避しつつ、妥協のない挙動を得るため
 * **配布ファイル (JSON):** `workflows/i2v_wan2.2_14b_lightweight.json`
 * **`Big_Jump.png`** (生成元画像)<br>
   👉 Image-to-Video（動画生成）のベースとなる元画像です。JSONワークフローを読み込んだ後、`Load Image` ノードにこの画像を読み込ませて動画を生成します。
-* **生成サンプル動画:** `workflows/` フォルダ内に格納しています（例: `Big_Jump.mp4`）
+* **生成サンプル動画:** `workflows/Big_Jump.mp4`
 * **必要カスタムノード:** `ComfyUI-WanVideoWrapper`, `ComfyUI-GGUF`, `ComfyUI-VideoHelperSuite`
 * **Unetモデル (GGUF):** `ComfyUI/models/unet/`
   * `Wan2.2-I2V-14B-HighNoise-Q5_K_M.gguf` (前半用)
