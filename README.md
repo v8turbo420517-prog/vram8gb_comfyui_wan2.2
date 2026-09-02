@@ -46,9 +46,9 @@ When loading the two GGUF models (HighNoise / LowNoise), a temporary 0.3 GB cach
 ---
 
 * **File (JSON):** `workflows/i2v_wan2.2_14b_lightweight.json`
-* **`end_of_the_day.png`** (Input Source Image)<br>
+* **`Big_Jump.png`** (Input Source Image)<br>
   👉 This is the source image for the Image-to-Video generation. After loading the JSON workflow, select/load this image into the `Load Image` node to generate the video.
-* **Sample Clips:** Located in the `examples/` 
+* **Sample Clips:** Located in the `workflows/Big_Jump.mp4` 
 * **Workflow Architecture:**
   ![Workflow Preview](workflows/i2v_wan2.2_14b_lightweight.png)
 
