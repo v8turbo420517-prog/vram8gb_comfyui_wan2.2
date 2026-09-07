@@ -1,191 +1,282 @@
 # Hi there, I'm a Local AI Creator / Architect 👋
 
-I focus on creating 5-second silent cinematic videos using local AI, emphasizing the beauty of subtraction and subtle atmosphere ("ma"). 
-This profile serves as a technical portfolio for optimizing heavy AI models on a mid-range hardware setup.
+I focus on creating 5-second silent cinematic videos using local AI, emphasizing the beauty of subtraction and subtle atmosphere ("ma").
+This profile serves as a technical portfolio for running heavy AI video models efficiently on mid-range hardware.
 
 https://github.com/user-attachments/assets/20111eb2-aa5a-4886-83c6-aa9378e0e757
 
 ---
 
 ## 🛠️ Machine Specifications & Environment
-* **OS:** Windows 11 (Optimized for resource management)
+* **OS:** Windows 11
 * **CPU:** Intel Core i5-12400F
 * **GPU:** NVIDIA GeForce RTX 3060 Ti (VRAM 8GB)
 * **RAM:** 64GB
 * **Display:** Dual monitor setup (including EIZO ColorEdge CG248-4K for professional color management)
 
-## 🚀 Local AI Workflows & Benchmarks
-### 🎥 Wan2.2 / Wan2.1 (ComfyUI)
-Currently running heavy text-to-video / image-to-video models under strict **VRAM 8GB limitations**.
+## 🚀 Local AI Workflow
+### 🎥 Wan2.2 Image-to-Video / ComfyUI
 
-* **Quantization:** Utilizing Q5 GGUF / NF4 models to bypass OOM (Out of Memory) and maintain stability.
-* **VRAM Optimization:** Custom node management and strict VRAM caching rules in ComfyUI (Forge-based optimization logic).
-* **Cinematic Video Pipeline:** 
-  1. Low-VRAM Generation via ComfyUI (GGUF).
-  2. High-fidelity upscaling via **Topaz Video AI**.
-  3. Final editing, color management, and pacing adjustments via **Adobe Premiere Pro**.
+The main production workflow runs **Wan2.2 I2V A14B GGUF on an RTX 3060 Ti with only 8GB of VRAM**.
 
-### 🚀 Optimized Workflows
-You can find my custom production workflow in the `workflows/` directory.
+> **Important:** This workflow does **not** use `ComfyUI-WanVideoWrapper`.
+>
+> It is built around standard ComfyUI nodes, with `ComfyUI-GGUF` used only for loading the quantized Wan2.2 diffusion models. The intention is to keep ComfyUI focused on generation rather than turning it into an all-in-one post-production pipeline.
 
-#### Wan2.2 Image-to-Video (14B GGUF Split-Sampling)
-A highly optimized I2V workflow designed to bypass OOM on 8GB VRAM while retaining high-fidelity motion. It features a dual-KSampler setup that switches between different diffusion models for early and late denoising steps.
+### Design Philosophy
 
-### 🔄 2-Stage K-Sampler & Dynamic Model Swapping
+The workflow follows a simple division of labor:
 
-To completely bypass OOM (Out of Memory) errors on 8GB VRAM while retaining the high-fidelity motion of the 14B model, this workflow splits the generation into two sequential K-Samplers. 
+1. **ComfyUI / Wan2.2** — Generate the raw video.
+2. **Topaz Video AI** — Upscale and enhance the generated video.
+3. **Adobe Premiere Pro** — Final color adjustment, framing, and export.
 
-It dynamically switches between two different GGUF quantization models: a **HighNoise** model for building the initial cinematic structure (early denoising steps), and a **LowNoise** model for refining fine details (late denoising steps).
-
-📊VRAM & Memory Profile (RTX 3060 Ti 8GB, Measured Values)
-* Peak VRAM Usage: < 7.0 GB (Strictly stays within dedicated VRAM)
-* Shared System Memory: 0.0 GB (Avoids slow system memory fallback entirely)
-* Temporary Cache:<br>
-When loading the two GGUF models (HighNoise / LowNoise), a temporary 0.3 GB cache is allocated and immediately garbage-collected before the first K-Sampler stage begins its main processing. This avoids the slow Shared System Memory fallback entirely, maintaining peak performance under strict 8GB VRAM limits while completing generation with the 14B model.
+Upscaling, frame interpolation, and final finishing are intentionally kept outside ComfyUI. Each application performs the task it is best suited for.
 
 ---
 
-* **File (JSON):** `workflows/i2v_wan2.2_14b_lightweight.json`
-* **`Big_Jump.png`** (Input Source Image)<br>
-  👉 This is the source image for the Image-to-Video generation. After loading the JSON workflow, select/load this image into the `Load Image` node to generate the video.
-* **Sample Clips:** Located in the `workflows/Big_Jump.mp4` 
-* **Workflow Architecture:**
-  ![Workflow Preview](workflows/i2v_wan2.2_14b_lightweight.png)
+## 🚀 Optimized Workflow
 
-##### 🧩 Required Custom Nodes
-* `ComfyUI-WanVideoWrapper`
+The production workflow is available in the `workflows/` directory.
+
+### Wan2.2 Image-to-Video — 14B GGUF Split Sampling
+
+The workflow uses Wan2.2's separate **HighNoise** and **LowNoise** diffusion models with two sequential `KSamplerAdvanced` nodes.
+
+* **HighNoise model:** early denoising stage
+* **LowNoise model:** late denoising stage
+* **Steps:** 8 total
+* **CFG:** 1.0
+* **Sampler:** Euler
+* **Scheduler:** SGM Uniform
+* **Negative prompt:** normally left empty
+
+The source image is not merely a visual reference. `CLIP Vision` encodes the input image and provides image conditioning to the Wan I2V pipeline. For this reason, the quality and composition of the source image are a major part of the workflow.
+
+### Native ComfyUI Structure
+
+The workflow deliberately stays close to ComfyUI's normal node structure:
+
+`Load Image → CLIP Vision → Wan I2V conditioning → KSampler (HighNoise) → KSampler (LowNoise) → VAE Decode → Save Video`
+
+The final decode uses the normal `VAEDecode` node rather than a tiled VAE decode.
+
+---
+
+### 📊 Memory Profile
+
+This workflow has been tested on:
+
+* **GPU:** RTX 3060 Ti 8GB
+* **RAM:** 64GB
+* **Model:** Wan2.2 I2V A14B Q5_K_M GGUF
+
+The objective is not to force every operation into VRAM. Instead, the workflow keeps the generation graph simple enough for ComfyUI's memory management to run the 14B model reliably on an 8GB card.
+
+---
+
+### 📁 Files
+
+* **Workflow JSON:** `workflows/i2v_wan2.2_14b_lightweight.json`
+* **Input source image:** `workflows/Big_Jump.png`
+* **Sample video:** `workflows/Big_Jump.mp4`
+* **Workflow preview:**
+
+![Workflow Preview](workflows/i2v_wan2.2_14b_lightweight.png)
+
+After loading the JSON workflow, load `Big_Jump.png` into the `Load Image` node to reproduce the sample setup.
+
+### 🧩 Required Custom Nodes
+
 * `ComfyUI-GGUF`
-* `ComfyUI-VideoHelperSuite`
 
-##### 💾 Required Models & Paths
-* **Unet Models (GGUF):** `ComfyUI/models/unet/`
-  * `Wan2.2-I2V-14B-HighNoise-Q5_K_M.gguf` (For initial steps)
-  * `Wan2.2-I2V-14B-LowNoise-Q5_K_M.gguf` (For refinement steps)
-* **Text Encoder:** `ComfyUI/models/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors` (Type: `wan`)
-* **VAE:** `ComfyUI/models/vae/Wan2.1_VAE.safetensors` (Required for this workflow)
-* **CLIP Vision:** `ComfyUI/models/clip_vision/clip-vision_vit-h.safetensors`
-* **LoRA** `ComfyUI/models/loras/`
-  * `Wan2.2-Lightning_I2V-A14B-4steps-lora_HIGH_fp16.safetensors`
-  * `Wan2.2-Lightning_I2V-A14B-4steps-lora_LOW_fp16.safetensors`
+`ComfyUI-WanVideoWrapper` is **not required** by this workflow.
 
----
+### 💾 Required Models & Paths
 
-🛠️ External Tools & Post-Production Settings
-1. ComfyUI (Wan2.2) — Generation
-* Role: Generates the core motion, composition, and cinematic atmosphere based on the prompt.
+#### Diffusion Models (GGUF)
+`ComfyUI/models/unet/`
 
-* Philosophy: Prioritizes generation speed and VRAM efficiency. It focuses purely on outputting high-potential "raw material" without forced upscaling or frame interpolation at this stage.
+* `Wan2.2-I2V-A14B-HighNoise-Q5_K_M.gguf`
+* `Wan2.2-I2V-A14B-LowNoise-Q5_K_M.gguf`
 
-2. Topaz Video AI — Enhancement & Upscaling
-* AI Model: Rhea (Auto)
+#### Text Encoder
+`ComfyUI/models/text_encoders/`
 
-* Resolution: 400% (4x) Upscale
+* `umt5_xxl_fp8_e4m3fn_scaled.safetensors` — type: `wan`
 
-* Why this setting: Because it reconstructs fine details lost during upscaling while preserving a natural texture.
+#### VAE
+`ComfyUI/models/vae/`
 
-3. Premiere Pro — Final Color Grading & Export
-* Sequence: Full HD+ (1920x1920) — Apply "Set to Frame Size" (or Match Sequence Settings) to fit the upscaled Topaz source into the Full HD+ timeline.
+* `Wan2.1_VAE.safetensors`
 
-* Lumetri Color Profile: Fixes the typical "washed-out" look of AI raw videos by enhancing presence and clarity with these precise values:
+#### CLIP Vision
+`ComfyUI/models/clip_vision/`
 
-  * Exposure: +0.2
+* `clip-vision_vit-h.safetensors`
 
-  * Contrast: +5
+#### LoRA
+`ComfyUI/models/loras/`
 
-  * Vibrance: +10
-
-  * Saturation: 105
-
-  * Sharpening: +7
-
-* Export Setting: H.264 / Match Source - Adaptive High Bitrate (Ensures reliable high quality and optimal file size for video platforms).
+* `Wan2.2-Lightning_I2V-A14B-4steps-lora_HIGH_fp16.safetensors`
+* `Wan2.2-Lightning_I2V-A14B-4steps-lora_LOW_fp16.safetensors`
 
 ---
 
-## Future Plan & Roadmap
-The core workflow is now fully complete and optimized. You can view past archives and other videos in 5-second video.
+## 🛠️ External Tools & Post-Production
+
+### 1. ComfyUI / Wan2.2 — Generation
+
+ComfyUI is used only for the core I2V generation and video output. The workflow intentionally avoids unnecessary post-processing nodes.
+
+### 2. Topaz Video AI — Enhancement & Upscaling
+
+The generated source is passed to Topaz Video AI for high-quality upscaling. This keeps the expensive generative stage at a practical resolution while allowing the final output resolution to be handled by a dedicated enhancement tool.
+
+### 3. Adobe Premiere Pro — Final Editing
+
+Final framing, color adjustment, sharpening, and export are handled in Premiere Pro.
+
+Typical Lumetri values:
+
+* Exposure: +0.2
+* Contrast: +5
+* Vibrance: +10
+* Saturation: 105
+* Sharpening: +7
+
+Final square output: **1920 × 1920**.
+
+---
 
 ## 🔗 Links
-* **5-second video:** [https://5s-video.com] (Gallery)
-* **Instagram:** [http://www.instagram.com/mii_jukuchou/] (Reel Videos)
+
+* **5-second video:** https://5s-video.com
+* **Instagram:** http://www.instagram.com/mii_jukuchou/
 
 ---
 
-## 🇯🇵 プロフィール（日本語）
-ローカルAIを活用し、無駄を削ぎ落とした5秒のサイレントシネマ（猫や日常の静寂、間をテーマにした映像作品）を制作しています。
+# 🇯🇵 日本語
 
-このGitHubでは、「VRAM 8GB」という限られたミドルクラス環境で、最新の重量級動画生成モデル（Wan2.2等）をいかに枯渇（OOM）させず、かつ高品質に回すかという技術的なアプローチとワークフローの挙動を記録しています。
+ローカルAIを活用し、5秒のサイレント映像を制作しています。
+このリポジトリでは、**RTX 3060 Ti / VRAM 8GBという環境でWan2.2 I2V A14Bを実運用するためのComfyUIワークフロー**を公開しています。
 
-* **主なツール:** ComfyUI, Wan2.2 / Wan2.1, Topaz Video AI, Adobe Premiere Pro
+## 🎥 重要：WanVideoWrapperは使用していません
 
-### 🚀 公開ワークフロー
-実際の制作に使用しているワークフローファイルを `workflows/` フォルダ内で公開しています。
+このワークフローでは **`ComfyUI-WanVideoWrapper` を使用していません。**
 
-#### Wan2.2 Image-to-Video (14B GGUF 前後段切り替え軽量化版)
-VRAM 8GB環境でのOOMを回避しつつ、妥協のない挙動を得るために設計したI2Vワークフローです。2段構えのKサンプラー（高度）を使用し、動画の骨組みを作る前半（HighNoise）と、ディテールを整える後半（LowNoise）で異なるGGUFモデルを動的に切り替える玄人向けの設計になっています。
+Wan専用Wrapperに処理をまとめる方式ではなく、ComfyUIの通常ノードを中心に構成し、GGUFモデルの読み込みに `ComfyUI-GGUF` を使用しています。
 
-📊 VRAM & メモリプロファイル (RTX 3060 Ti 8GB 実測値)
-* ピーク時VRAM使用量: 7.0 GB 未満 (専用VRAM内に完全に収まります)
-* 共有システムメモリ: 0.0 GB (速度低下の原因となるメインメモリへの退避を完全回避)
-* 一時キャッシュ:<br>
-2つのGGUFモデル（HighNoise / LowNoise）を読み込む際、一時的に約0.3GBのキャッシュが確保されますが、前段のKサンプラーによる本処理が始まる前にガベージコレクションにより即座に解放されます。これにより、共有システムメモリ（Shared Memory）への低速なフォールバックを完全に回避し、8GB VRAMの限界性能を維持したまま14Bモデルの生成を完走させます。
+つまり、WanVideoWrapper独自のワークフローではなく、できるだけ**ComfyUI本来のノード構成をそのまま使ったWan2.2 I2Vワークフロー**です。
 
----
+## 設計思想 — 分業制
 
-* **配布ファイル (JSON):** `workflows/i2v_wan2.2_14b_lightweight.json`
-* **`Big_Jump.png`** (生成元画像)<br>
-  👉 Image-to-Video（動画生成）のベースとなる元画像です。JSONワークフローを読み込んだ後、`Load Image` ノードにこの画像を読み込ませて動画を生成します。
-* **生成サンプル動画:** `workflows/Big_Jump.mp4`
-* **必要カスタムノード:** `ComfyUI-WanVideoWrapper`, `ComfyUI-GGUF`, `ComfyUI-VideoHelperSuite`
-* **Unetモデル (GGUF):** `ComfyUI/models/unet/`
-  * `Wan2.2-I2V-14B-HighNoise-Q5_K_M.gguf` (前半用)
-  * `Wan2.2-I2V-14B-LowNoise-Q5_K_M.gguf` (後半用)
-* **Text Encoder:** `ComfyUI/models/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors` (タイプ: `wan`)
-* **VAE:** `ComfyUI/models/vae/Wan2.1_VAE.safetensors` (必ずこれを使用すること)
-* **CLIP Vision:** `ComfyUI/models/clip_vision/clip-vision_vit-h.safetensors`
-* **LoRA** `ComfyUI/models/loras/`
-  * `Wan2.2-Lightning_I2V-A14B-4steps-lora_HIGH_fp16.safetensors`
-  * `Wan2.2-Lightning_I2V-A14B-4steps-lora_LOW_fp16.safetensors`
+ComfyUIですべてを完結させることを目的にしていません。
+
+1. **ComfyUI / Wan2.2** — 動画生成
+2. **Topaz Video AI** — 高画質化・アップスケール
+3. **Adobe Premiere Pro** — 最終調整・書き出し
+
+アップスケールや補間などを生成ワークフローへ追加せず、ComfyUIには動画生成そのものに集中させています。
 
 ---
 
-🛠️ 外部ツールの役割と詳細設定
-1. ComfyUI (Wan2.2) — Generation（生成）
-* 役割: プロンプトに忠実な構図、キャラクターの動き、空気感のベース生成。
+## 🚀 Wan2.2 I2V A14B GGUF 前後段切り替え
 
-* 設計思想: 生成速度とVRAM効率を最優先し、この段階では無理な高解像度化や補間は行いません。ポテンシャルの高い「ピュアな生素材」を出力することに特化させています。
+Wan2.2のHighNoiseモデルとLowNoiseモデルを、それぞれ2つの `KSamplerAdvanced` で前半・後半に分けて処理します。
 
-2. Topaz Video AI — Enhancement & Upscaling（高画質化）
-* AIモデル: Rhea (Auto)
+* **HighNoise:** 前半
+* **LowNoise:** 後半
+* **Steps:** 8
+* **CFG:** 1.0
+* **Sampler:** Euler
+* **Scheduler:** SGM Uniform
+* **Negative Prompt:** 通常は空欄
 
-* 解像度: 400% (4倍) アップスケール
+### 元画像とCLIP Vision
 
-* 選定理由: アップスケールで失ったディテールを自然な質感を維持しながら細部を再構築するから
+このワークフローでは元画像を非常に重要視しています。
 
-3. Premiere Pro — Final Color Grading & Export（編集・書き出し）
-*シーケンス設定: フルHD+ (1920x1920)
+`CLIP Vision` で元画像をエンコードし、その情報をWan I2Vのコンディショニングへ渡します。そのため、長いプロンプトで映像を作り込むより、**元画像の構図と情報を活かし、プロンプトは動作を簡潔に指示する**ことを基本としています。
 
-* タイムライン配置後、「フレームサイズに合わせる」を適用。
+### ワークフロー構成
 
-* Lumetriカラー設定: AI動画特有の「眠い（コントラストや発色が弱い）印象」を解消し、映像の存在感を決定づける基本プロファイルです。
+`Load Image → CLIP Vision → Wan I2V conditioning → KSampler (HighNoise) → KSampler (LowNoise) → VAE Decode → Save Video`
 
-  * 露出量: +0.2 (透明感と明るさをプラス)
-
-  * コントラスト: +5 (立体感を強調)
-
-  * 自然な彩度: +10 (くすんだ色味を自然に底上げ)
-
-  * 彩度: 105 (全体のトーンを鮮やかに固定)
-
-  * シャープネス: +7 (輪郭線をキュッと引き締める)
-
-* 書き出し設定: H.264 / ソースの一致 - アダプティブビットレート（高） (各種プラットフォームに最適化された、破綻のない高画質書き出し)
+最終デコードにはタイルVAEではなく、通常の `VAEDecode` を使用しています。
 
 ---
 
-## 今後の展開 / ロードマップ
-コアとなるワークフローはこれで完全に完成・最適化されています。過去のアーカイブやその他の動画は、5秒動画でご覧いただけます。
-  
+## 📁 公開ファイル
+
+* **JSON:** `workflows/i2v_wan2.2_14b_lightweight.json`
+* **元画像:** `workflows/Big_Jump.png`
+* **生成サンプル:** `workflows/Big_Jump.mp4`
+* **ワークフロー画像:** `workflows/i2v_wan2.2_14b_lightweight.png`
+
+JSONを読み込んだ後、`Load Image` ノードへ `Big_Jump.png` を読み込めばサンプルと同じ構成になります。
+
+### 🧩 必要なカスタムノード
+
+* `ComfyUI-GGUF`
+
+**`ComfyUI-WanVideoWrapper` は不要です。**
+
+### 💾 必要モデル
+
+#### GGUF
+`ComfyUI/models/unet/`
+
+* `Wan2.2-I2V-A14B-HighNoise-Q5_K_M.gguf`
+* `Wan2.2-I2V-A14B-LowNoise-Q5_K_M.gguf`
+
+#### Text Encoder
+`ComfyUI/models/text_encoders/`
+
+* `umt5_xxl_fp8_e4m3fn_scaled.safetensors`
+
+#### VAE
+`ComfyUI/models/vae/`
+
+* `Wan2.1_VAE.safetensors`
+
+#### CLIP Vision
+`ComfyUI/models/clip_vision/`
+
+* `clip-vision_vit-h.safetensors`
+
+#### LoRA
+`ComfyUI/models/loras/`
+
+* `Wan2.2-Lightning_I2V-A14B-4steps-lora_HIGH_fp16.safetensors`
+* `Wan2.2-Lightning_I2V-A14B-4steps-lora_LOW_fp16.safetensors`
+
+---
+
+## 🛠️ 後工程
+
+### ComfyUI
+動画生成と保存まで。
+
+### Topaz Video AI
+生成した動画のアップスケール・高画質化を担当。
+
+### Premiere Pro
+最終的なフレーミング、カラー調整、シャープネス、書き出しを担当。
+
+基本Lumetri設定：
+
+* 露出量: +0.2
+* コントラスト: +5
+* 自然な彩度: +10
+* 彩度: 105
+* シャープネス: +7
+
+最終的な正方形動画は **1920 × 1920** で出力します。
+
+---
+
 ## 🔗 リンク
-* **5秒動画:** [https://5s-video.com] (ギャラリー)
-* **インスタグラム:** [http://www.instagram.com/mii_jukuchou/] (リール動画)
+
+* **5秒動画:** https://5s-video.com
+* **Instagram:** http://www.instagram.com/mii_jukuchou/
