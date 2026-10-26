@@ -97,8 +97,8 @@ After loading the JSON workflow, load `Big_Jump.png` into the `Load Image` node 
 #### Diffusion Models (GGUF)
 `ComfyUI/models/unet/`
 
-* `Wan2.2-I2V-A14B-HighNoise-Q5_K_M.gguf`
-* `Wan2.2-I2V-A14B-LowNoise-Q5_K_M.gguf`
+* `Wan2.2-I2V-A14B-HighNoise-Q6_K.gguf`
+* `Wan2.2-I2V-A14B-LowNoise-Q6_K.gguf`
 
 #### Text Encoder
 `ComfyUI/models/text_encoders/`
@@ -227,8 +227,8 @@ JSONを読み込んだ後、`Load Image` ノードへ `Big_Jump.png` を読み�
 #### GGUF
 `ComfyUI/models/unet/`
 
-* `Wan2.2-I2V-A14B-HighNoise-Q5_K_M.gguf`
-* `Wan2.2-I2V-A14B-LowNoise-Q5_K_M.gguf`
+* `Wan2.2-I2V-A14B-HighNoise-Q6_K.gguf`
+* `Wan2.2-I2V-A14B-LowNoise-Q6_K.gguf`
 
 #### Text Encoder
 `ComfyUI/models/text_encoders/`
