@@ -78,13 +78,13 @@ The objective is not to force every operation into VRAM. Instead, the workflow k
 ### 📁 Files
 
 * **Workflow JSON:** `workflows/i2v_wan2.2_14b_lightweight.json`
-* **Input source image:** `workflows/Big_Jump.png`
-* **Sample video:** `workflows/Big_Jump.mp4`
+* **Input source image:** `workflows/Sample.png`
+* **Sample video:** `workflows/Sample.mp4`
 * **Workflow preview:**
 
 ![Workflow Preview](workflows/i2v_wan2.2_14b_lightweight.png)
 
-After loading the JSON workflow, load `Big_Jump.png` into the `Load Image` node to reproduce the sample setup.
+After loading the JSON workflow, load `Sample.png` into the `Load Image` node to reproduce the sample setup.
 
 ### 🧩 Required Custom Nodes
 
@@ -210,11 +210,11 @@ Wan2.2のHighNoiseモデルとLowNoiseモデルを、それぞれ2つの `KSampl
 ## 📁 公開ファイル
 
 * **JSON:** `workflows/i2v_wan2.2_14b_lightweight.json`
-* **元画像:** `workflows/Big_Jump.png`
-* **生成サンプル:** `workflows/Big_Jump.mp4`
+* **元画像:** `workflows/Sample.png`
+* **生成サンプル:** `workflows/Sample.mp4`
 * **ワークフロー画像:** `workflows/i2v_wan2.2_14b_lightweight.png`
 
-JSONを読み込んだ後、`Load Image` ノードへ `Big_Jump.png` を読み込めばサンプルと同じ構成になります。
+JSONを読み込んだ後、`Load Image` ノードへ `Sample.png` を読み込めばサンプルと同じ構成になります。
 
 ### 🧩 必要なカスタムノード
 
