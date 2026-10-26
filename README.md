@@ -69,7 +69,7 @@ This workflow has been tested on:
 
 * **GPU:** RTX 3060 Ti 8GB
 * **RAM:** 64GB
-* **Model:** Wan2.2 I2V A14B Q5_K_M GGUF
+* **Model:** Wan2.2 I2V A14B Q6_K GGUF
 
 The objective is not to force every operation into VRAM. Instead, the workflow keeps the generation graph simple enough for ComfyUI's memory management to run the 14B model reliably on an 8GB card.
 
