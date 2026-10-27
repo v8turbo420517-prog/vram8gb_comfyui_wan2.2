@@ -39,6 +39,14 @@ Upscaling, frame interpolation, and final finishing are intentionally kept outsi
 
 The production workflow is available in the `workflows/` directory.
 
+The published workflow JSON uses the following generation and video output settings:
+
+* **Generation resolution:** 640 × 640
+* **Number of frames:** 81
+* **Video frame rate:** 16 fps
+
+These values describe the settings saved in the published workflow JSON.
+
 ### Wan2.2 Image-to-Video — 14B GGUF Split Sampling
 
 The workflow uses Wan2.2's separate **HighNoise** and **LowNoise** diffusion models with two sequential `KSamplerAdvanced` nodes.
@@ -133,6 +141,8 @@ ComfyUI is used only for the core I2V generation and video output. The workflow 
 
 The generated source is passed to Topaz Video AI for high-quality upscaling. This keeps the expensive generative stage at a practical resolution while allowing the final output resolution to be handled by a dedicated enhancement tool.
 
+In the current post-production workflow, Topaz Video AI uses the Rhea model at 4× upscaling.
+
 ### 3. Adobe Premiere Pro — Final Editing
 
 Final framing, color adjustment, sharpening, and export are handled in Premiere Pro.
@@ -180,6 +190,14 @@ ComfyUIですべてを完結させることを目的にしていません。
 アップスケールや補間などを生成ワークフローへ追加せず、ComfyUIには動画生成そのものに集中させています。
 
 ---
+
+公開ワークフローJSONには、以下の生成・動画出力設定が保存されています。
+
+* **生成解像度:** 640 × 640
+* **フレーム数:** 81
+* **動画フレームレート:** 16 fps
+
+これらは公開ワークフローJSONに保存されている設定です。
 
 ## 🚀 Wan2.2 I2V A14B GGUF 前後段切り替え
 
@@ -260,6 +278,7 @@ JSONを読み込んだ後、`Load Image` ノードへ `Sample.png` を読み込�
 
 ### Topaz Video AI
 生成した動画のアップスケール・高画質化を担当。
+現在の後工程では、Topaz Video AIのRheaモデルを使用し、4倍にアップスケールしています。
 
 ### Premiere Pro
 最終的なフレーミング、カラー調整、シャープネス、書き出しを担当。
