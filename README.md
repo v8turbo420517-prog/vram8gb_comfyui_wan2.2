@@ -278,6 +278,7 @@ JSONを読み込んだ後、`Load Image` ノードへ `Sample.png` を読み込�
 
 ### Topaz Video AI
 生成した動画のアップスケール・高画質化を担当。
+
 現在の後工程では、Topaz Video AIのRheaモデルを使用し、4倍にアップスケールしています。
 
 ### Premiere Pro
