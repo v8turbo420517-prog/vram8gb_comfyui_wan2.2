@@ -53,7 +53,10 @@ The workflow uses Wan2.2's separate **HighNoise** and **LowNoise** diffusion mod
 
 * **HighNoise model:** early denoising stage
 * **LowNoise model:** late denoising stage
-* **Steps:** 8 total
+* **Steps:** 8 total. The HighNoise sampler handles steps 0–4, and the
+  LowNoise sampler handles step 4 through the end. Both KSamplerAdvanced
+  nodes have `steps: 8`; this does not mean 8 steps per node, or 16 total.
+* **LoRA model strength:** HIGH 1.5, LOW 1.0
 * **CFG:** 1.0
 * **Sampler:** Euler
 * **Scheduler:** SGM Uniform
@@ -92,7 +95,10 @@ The objective is not to force every operation into VRAM. Instead, the workflow k
 
 ![Workflow Preview](workflows/i2v_wan2.2_14b_lightweight.png)
 
-After loading the JSON workflow, load `Sample.png` into the `Load Image` node to reproduce the sample setup.
+The Load Image node in the JSON retains the filename
+`秋色の森に佇むルリビタキ.png` from when the workflow was saved.
+To use the published sample image, load `workflows/Sample.png` into
+ComfyUI and select it in the Load Image node.
 
 ### 🧩 Required Custom Nodes
 
@@ -205,7 +211,10 @@ Wan2.2のHighNoiseモデルとLowNoiseモデルを、それぞれ2つの `KSampl
 
 * **HighNoise:** 前半
 * **LowNoise:** 後半
-* **Steps:** 8
+* **Steps:** 合計8ステップ。HighNoise側は0〜4、LowNoise側は4〜最後を担当します。
+  両方のKSamplerAdvancedに `steps: 8` を設定していますが、
+  8ステップずつ、合計16ステップを実行する設定ではありません。
+* **LoRAのモデル適用倍率:** HIGH 1.5、LOW 1.0
 * **CFG:** 1.0
 * **Sampler:** Euler
 * **Scheduler:** SGM Uniform
@@ -232,7 +241,10 @@ Wan2.2のHighNoiseモデルとLowNoiseモデルを、それぞれ2つの `KSampl
 * **生成サンプル:** `workflows/Sample.mp4`
 * **ワークフロー画像:** `workflows/i2v_wan2.2_14b_lightweight.png`
 
-JSONを読み込んだ後、`Load Image` ノードへ `Sample.png` を読み込めばサンプルと同じ構成になります。
+JSONのLoad Imageノードには、保存時の画像名
+`秋色の森に佇むルリビタキ.png` が記録されています。
+公開サンプル画像を使用する場合は、`workflows/Sample.png` を
+ComfyUIで読み込み、Load Imageノードで選択してください。
 
 ### 🧩 必要なカスタムノード
 
